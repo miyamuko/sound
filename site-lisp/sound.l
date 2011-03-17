@@ -269,7 +269,7 @@ NetInstaller + (({ni-autoload})) を使っている人は 5 以降で OK です。
 
 sound は修正 BSD ライセンスに基づいて利用可能です。
 
-  Copyright (C) 2005 MIYAMUKO Katsuyuki. All rights reserved.
+  Copyright (C) 2005,2011 MIYAMUKO Katsuyuki. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -479,16 +479,19 @@ sound は修正 BSD ライセンスに基づいて利用可能です。
                          #'string-lessp)))
 
 (defun get-alias-label (alias-name)
-  (read-registry (format nil "AppEvents\\EventLabels\\~A" alias-name)
-                 nil :current-user))
+  (ignore-errors
+   (read-registry (format nil "AppEvents\\EventLabels\\~A" alias-name)
+                  nil :current-user)))
 
 (defun get-app-label (app)
-  (read-registry (format nil "AppEvents\\Schemes\\Apps\\~A" app)
-                 nil :current-user))
+  (ignore-errors
+   (read-registry (format nil "AppEvents\\Schemes\\Apps\\~A" app)
+                  nil :current-user)))
 
 (defun get-current-value (app alias-name)
-  (read-registry (format nil "AppEvents\\Schemes\\Apps\\~A\\~A\\.Current" app alias-name)
-                 nil :current-user))
+  (ignore-errors
+   (read-registry (format nil "AppEvents\\Schemes\\Apps\\~A\\~A\\.Current" app alias-name)
+                  nil :current-user)))
 
 ;; ----------------------------------------------------------------------
 (in-package "editor")
